@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Forex Trading Mastery Roadmap</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root {
+  --bg: #0F1117; --bg2: #161B27; --bg3: #1E2535; --bg4: #252D40;
+  --border: #2D3748; --border2: #374151;
+  --text: #F1F5F9; --text2: #94A3B8; --text3: #64748B;
+  --green: #1D9E75; --green-l: #0F5541; --green-ll: #E1F5EE;
+  --blue: #378ADD; --blue-l: #1A4A7A; --blue-ll: #E6F1FB;
+  --red: #E24B4A; --red-l: #7A1F1F; --red-ll: #FCEBEB;
+  --amber: #EF9F27; --amber-l: #7A5010; --amber-ll: #FAEEDA;
+  --purple: #7F77DD; --purple-l: #3C3489; --purple-ll: #EEEDFE;
+  --white: #FFFFFF;
+  --radius: 10px; --radius-sm: 6px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(15,17,23,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 24px; height: 56px; display: flex; align-items: center; justify-content: space-between; }
+.nav-brand { font-size: 14px; font-weight: 700; color: var(--amber); letter-spacing: .5px; }
+.nav-steps { display: flex; gap: 4px; }
+.nav-step { width: 28px; height: 28px; border-radius: 50%; font-size: 11px; font-weight: 700; border: none; cursor: pointer; transition: all .2s; display: flex; align-items: center; justify-content: center; background: var(--bg3); color: var(--text2); }
+.nav-step.active { color: #fff; transform: scale(1.1); }
+.nav-step[data-s="1"].active,.nav-step[data-s="2"].active { background: var(--green); }
+.nav-step[data-s="3"].active { background: var(--purple); }
+.nav-step[data-s="4"].active,.nav-step[data-s="5"].active { background: var(--blue); }
+.nav-step[data-s="6"].active { background: var(--amber); }
+.nav-step[data-s="7"].active { background: var(--red); }
+
+/* LAYOUT */
+.page { display: none; padding: 80px 24px 48px; max-width: 900px; margin: 0 auto; animation: fadeIn .3s ease; }
+.page.active { display: block; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+/* HERO */
+.hero { text-align: center; padding: 64px 24px 48px; max-width: 900px; margin: 0 auto; }
+.hero h1 { font-size: clamp(28px,5vw,52px); font-weight: 800; line-height: 1.15; margin-bottom: 16px; }
+.hero h1 span { color: var(--amber); }
+.hero p { font-size: 16px; color: var(--text2); max-width: 560px; margin: 0 auto 32px; }
+.roadmap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 12px; margin: 32px 0; }
+.roadmap-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; cursor: pointer; transition: all .2s; text-align: left; border-left: 3px solid transparent; }
+.roadmap-card:hover { background: var(--bg3); transform: translateY(-2px); box-shadow: var(--shadow); }
+.roadmap-card.s1,.roadmap-card.s2 { border-left-color: var(--green); }
+.roadmap-card.s3 { border-left-color: var(--purple); }
+.roadmap-card.s4,.roadmap-card.s5 { border-left-color: var(--blue); }
+.roadmap-card.s6 { border-left-color: var(--amber); }
+.roadmap-card.s7 { border-left-color: var(--red); }
+.roadmap-card .step-num { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+.roadmap-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.roadmap-card p { font-size: 12px; color: var(--text2); }
+
+/* STEP HEADER */
+.step-header { border-radius: var(--radius); padding: 24px 28px; margin-bottom: 28px; }
+.step-header .step-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; opacity: .8; margin-bottom: 6px; }
+.step-header h2 { font-size: 26px; font-weight: 800; margin-bottom: 6px; }
+.step-header p { font-size: 14px; opacity: .85; }
+
+/* CARDS & SECTIONS */
+.card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 16px; }
+.card h3 { font-size: 16px; font-weight: 700; margin-bottom: 12px; }
+.card h4 { font-size: 13px; font-weight: 600; margin-bottom: 8px; color: var(--text2); text-transform: uppercase; letter-spacing: .5px; }
+.section-title { font-size: 19px; font-weight: 700; margin: 28px 0 14px; }
+
+/* TABLES */
+.tbl-wrap { overflow-x: auto; border-radius: var(--radius-sm); }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { background: var(--bg4); color: var(--text); font-weight: 600; padding: 10px 12px; text-align: left; font-size: 12px; }
+td { padding: 9px 12px; border-bottom: 1px solid var(--border); color: var(--text2); }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--bg3); color: var(--text); }
+
+/* CHECKLIST */
+.checklist { list-style: none; }
+.checklist li { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); cursor: pointer; }
+.checklist li:last-child { border-bottom: none; }
+.chk-box { width: 20px; height: 20px; border-radius: 5px; border: 1.5px solid var(--border2); background: var(--bg3); flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; transition: all .15s; }
+.chk-box.done { background: var(--green); border-color: var(--green); }
+.chk-text strong { font-size: 13px; display: block; margin-bottom: 2px; }
+.chk-text span { font-size: 11px; color: var(--text3); }
+
+/* TAGS */
+.tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 20px; }
+.tag-green { background: var(--green-l); color: #4ADE80; }
+.tag-blue { background: var(--blue-l); color: #60A5FA; }
+.tag-red { background: var(--red-l); color: #F87171; }
+.tag-amber { background: var(--amber-l); color: #FCD34D; }
+.tag-purple { background: var(--purple-l); color: #A78BFA; }
+
+/* ALERT BOXES */
+.alert { border-radius: var(--radius-sm); padding: 14px 16px; margin: 12px 0; font-size: 13px; line-height: 1.6; }
+.alert-red { background: rgba(226,75,74,0.1); border: 1px solid rgba(226,75,74,0.3); color: #FCA5A5; }
+.alert-green { background: rgba(29,158,117,0.1); border: 1px solid rgba(29,158,117,0.3); color: #6EE7B7; }
+.alert-blue { background: rgba(55,138,221,0.1); border: 1px solid rgba(55,138,221,0.3); color: #93C5FD; }
+.alert-amber { background: rgba(239,159,39,0.1); border: 1px solid rgba(239,159,39,0.3); color: #FCD34D; }
+.alert strong { font-weight: 700; }
+
+/* INTERACTIVE TOOLS */
+.tool-box { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin: 16px 0; }
+.tool-box h4 { font-size: 14px; font-weight: 700; margin-bottom: 14px; }
+.slider-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; gap: 12px; }
+.slider-row label { font-size: 12px; color: var(--text2); min-width: 160px; }
+.slider-row input[type=range] { flex: 1; accent-color: var(--blue); }
+.slider-val { font-size: 13px; font-weight: 600; min-width: 60px; text-align: right; }
+.metrics-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(120px,1fr)); gap: 10px; margin-top: 14px; }
+.metric-box { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px; text-align: center; }
+.metric-box .mlabel { font-size: 10px; color: var(--text3); margin-bottom: 4px; text-transform: uppercase; letter-spacing: .5px; }
+.metric-box .mval { font-size: 20px; font-weight: 700; }
+.tab-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+.tab-btn { padding: 7px 14px; font-size: 12px; font-weight: 600; border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--border); background: var(--bg3); color: var(--text2); transition: all .15s; }
+.tab-btn.active { background: var(--blue); border-color: var(--blue); color: #fff; }
+.tab-panel { display: none; } .tab-panel.active { display: block; }
+
+/* CANDLE SVG */
+.candle-svg { width: 100%; max-width: 480px; display: block; margin: 0 auto; }
+
+/* GRID 2 */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media(max-width:560px){ .grid2{grid-template-columns:1fr;} .nav-steps{gap:2px;} .nav-step{width:24px;height:24px;font-size:10px;} }
+
+/* RESOURCE LIST */
+.res-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.res-item:last-child { border-bottom: none; }
+.res-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--bg4); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.res-body strong { font-size: 13px; display: block; margin-bottom: 2px; }
+.res-body span { font-size: 12px; color: var(--text2); }
+.res-link { font-size: 11px; color: var(--blue); margin-top: 2px; display: block; }
+
+/* PROGRESS BAR */
+.progress-wrap { background: var(--bg4); border-radius: 4px; height: 6px; margin: 8px 0 16px; }
+.progress-fill { height: 100%; border-radius: 4px; transition: width .4s; }
+
+/* NAV BUTTONS */
+.step-nav { display: flex; gap: 10px; margin-top: 36px; }
+.btn { padding: 10px 22px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; cursor: pointer; border: none; transition: all .15s; }
+.btn-primary { background: var(--blue); color: #fff; }
+.btn-primary:hover { background: #2a6fb5; }
+.btn-ghost { background: var(--bg3); color: var(--text2); border: 1px solid var(--border); }
+.btn-ghost:hover { background: var(--bg4); color: var(--text); }
+
+/* CANDLESTICK PATTERN CARDS */
+.pattern-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+.pattern-card { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px; cursor: pointer; transition: all .15s; }
+.pattern-card:hover, .pattern-card.sel { border-color: var(--blue); background: var(--bg4); }
+.pattern-card .pname { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+.pattern-card .psub { font-size: 11px; color: var(--text3); }
+.pattern-detail { background: var(--bg3); border-radius: var(--radius-sm); padding: 14px 16px; font-size: 13px; color: var(--text2); margin-top: 12px; min-height: 52px; line-height: 1.7; }
+
+/* TRAP CARDS */
+.trap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap: 10px; }
+.trap-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px; cursor: pointer; transition: all .15s; }
+.trap-card:hover,.trap-card.sel { background: var(--bg3); }
+.trap-card .tname { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+.trap-card .tsub { font-size: 11px; color: var(--text3); }
+.trap-detail { background: var(--bg3); border-radius: var(--radius-sm); padding: 16px; font-size: 13px; color: var(--text2); margin-top: 12px; line-height: 1.8; }
+.trap-detail .fix { background: rgba(29,158,117,0.1); border-left: 3px solid var(--green); padding: 10px 14px; border-radius: 0 6px 6px 0; margin-top: 12px; font-size: 12px; color: #6EE7B7; }
+
+/* FORMULA BOX */
+.formula { background: var(--bg4); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; font-family: 'Courier New', monospace; font-size: 13px; color: #A5F3FC; line-height: 1.8; margin: 12px 0; }
+
+/* EQUITY CURVE */
+canvas { border-radius: var(--radius-sm); }
+
+/* STEP BADGE */
+.step-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; padding: 4px 12px 4px 4px; margin-bottom: 8px; }
+.step-badge .num { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #fff; }
+.step-badge .lbl { font-size: 12px; font-weight: 600; color: var(--text2); }
+
+/* ACCORD */
+.accord { border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 8px; overflow: hidden; }
+.accord-head { display: flex; justify-content: space-between; align-items: center; padding: 13px 16px; cursor: pointer; background: var(--bg2); font-size: 13px; font-weight: 600; }
+.accord-head:hover { background: var(--bg3); }
+.accord-head .arr { color: var(--text3); transition: transform .2s; }
+.accord-head.open .arr { transform: rotate(90deg); }
+.accord-body { display: none; padding: 14px 16px; font-size: 13px; color: var(--text2); line-height: 1.7; background: var(--bg); border-top: 1px solid var(--border); }
+.accord-body.open { display: block; }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 28px; }
+.timeline::before { content:''; position:absolute; left:10px; top:0; bottom:0; width:2px; background:var(--border); }
+.tl-item { position: relative; margin-bottom: 20px; }
+.tl-dot { position: absolute; left: -22px; top: 4px; width: 12px; height: 12px; border-radius: 50%; border: 2px solid; }
+.tl-item h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.tl-item p { font-size: 12px; color: var(--text2); }
+
+/* FOOTER */
+footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; }
+footer p { font-size: 12px; color: var(--text3); }
+footer strong { color: var(--text2); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">📈 FOREX MASTERY</div>
+  <div class="nav-steps">
+    <button class="nav-step active" data-s="1" onclick="showPage('home')">🏠</button>
+    <button class="nav-step" data-s="1" onclick="goStep(1)">1</button>
+    <button class="nav-step" data-s="2" onclick="goStep(2)">2</button>
+    <button class="nav-step" data-s="3" onclick="goStep(3)">3</button>
+    <button class="nav-step" data-s="4" onclick="goStep(4)">4</button>
+    <button class="nav-step" data-s="5" onclick="goStep(5)">5</button>
+    <button class="nav-step" data-s="6" onclick="goStep(6)">6</button>
+    <button class="nav-step" data-s="7" onclick="goStep(7)">7</button>
+  </div>
+</nav>
+
+<!-- HOME PAGE -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div style="font-size:48px;margin-bottom:12px">📈</div>
+    <h1>Forex Trading<br><span>Mastery Roadmap</span></h1>
+    <p>Your complete mentor-guided journey from absolute beginner to advanced trader. 7 steps. Every tool, concept, and resource you need.</p>
+    <div class="roadmap-grid">
+      <div class="roadmap-card s1" onclick="goStep(1)"><div class="step-num" style="color:var(--green)">STEP 1 — BEGINNER</div><h3>Forex Foundations</h3><p>Currencies, pips, lots, leverage</p></div>
+      <div class="roadmap-card s2" onclick="goStep(2)"><div class="step-num" style="color:var(--green)">STEP 2 — BEGINNER</div><h3>Charts & Price Action</h3><p>Candlesticks, trends, support & resistance</p></div>
+      <div class="roadmap-card s3" onclick="goStep(3)"><div class="step-num" style="color:var(--purple)">STEP 3 — BEGINNER</div><h3>Technical Indicators</h3><p>EMA, RSI, MACD, Bollinger Bands</p></div>
+      <div class="roadmap-card s4" onclick="goStep(4)"><div class="step-num" style="color:var(--blue)">STEP 4 — INTERMEDIATE</div><h3>Trading Strategy</h3><p>Entry/exit rules, backtesting</p></div>
+      <div class="roadmap-card s5" onclick="goStep(5)"><div class="step-num" style="color:var(--blue)">STEP 5 — INTERMEDIATE</div><h3>Risk Management</h3><p>Position sizing, R:R, trade journal</p></div>
+      <div class="roadmap-card s6" onclick="goStep(6)"><div class="step-num" style="color:var(--amber)">STEP 6 — ADVANCED</div><h3>Trading Psychology</h3><p>FOMO, revenge trading, discipline</p></div>
+      <div class="roadmap-card s7" onclick="goStep(7)"><div class="step-num" style="color:var(--red)">STEP 7 — MASTER</div><h3>Advanced Mastery</h3><p>Fundamentals, macro, going live</p></div>
+    </div>
+    <button class="btn btn-primary" onclick="goStep(1)" style="margin-top:8px">Start with Step 1 →</button>
+  </div>
+</div>
+
+<!-- STEP 1 -->
+<div class="page" id="page-1">
+  <div class="step-header" style="background:linear-gradient(135deg,var(--green-l),#0a3d2b)">
+    <div class="step-label">Step 1 — Beginner</div>
+    <h2>Forex Foundations</h2>
+    <p>How the market works, currencies, pips, and lots</p>
+  </div>
+
+  <div class="card">
+    <h3>What is Forex?</h3>
+    <p style="font-size:14px;color:var(--text2);line-height:1.8">The Foreign Exchange market is where currencies are bought and sold — <strong style="color:var(--text)">$7.5 trillion traded every single day</strong>, making it the largest financial market on earth. It runs 24 hours a day, 5 days a week, across four major sessions: Sydney → Tokyo → London → New York. You always trade in <strong style="color:var(--green)">pairs</strong>: buying one currency while simultaneously selling another.</p>
+  </div>
+
+  <div class="section-title">Essential Terminology</div>
+  <div class="card" style="padding:0">
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Term</th><th>Plain English</th></tr>
+        <tr><td><strong>Currency pair</strong></td><td>Two currencies traded against each other — EUR/USD, GBP/USD</td></tr>
+        <tr><td><strong>Base / Quote</strong></td><td>EUR/USD: EUR is base (first), USD is quote (second)</td></tr>
+        <tr><td><strong>Pip</strong></td><td>Smallest price move: 0.0001 for most pairs; 0.01 for JPY pairs</td></tr>
+        <tr><td><strong>Bid / Ask</strong></td><td>Bid = broker buys from you. Ask = broker sells to you.</td></tr>
+        <tr><td><strong>Spread</strong></td><td>Bid-Ask difference — the broker's transaction fee on every trade</td></tr>
+        <tr><td><strong>Standard lot</strong></td><td>100,000 units. Mini = 10,000. <span class="tag tag-green">Micro = 1,000 — use this as a beginner</span></td></tr>
+        <tr><td><strong>Leverage</strong></td><td>Borrowing from broker to control larger positions. Amplifies BOTH gains and losses.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section-title">Major Currency Pairs</div>
+  <div class="card" style="padding:0">
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Pair</th><th>Nickname</th><th>Characteristic</th></tr>
+        <tr><td><strong>EUR/USD</strong></td><td>The Fiber</td><td>Most traded — tightest spreads. <span class="tag tag-green">Start here</span></td></tr>
+        <tr><td><strong>GBP/USD</strong></td><td>Cable</td><td>Volatile, large daily range</td></tr>
+        <tr><td><strong>USD/JPY</strong></td><td>The Ninja</td><td>JPY is a safe-haven currency</td></tr>
+        <tr><td><strong>AUD/USD</strong></td><td>Aussie</td><td>Correlated with gold and iron ore prices</td></tr>
+        <tr><td><strong>USD/CAD</strong></td><td>Loonie</td><td>Strongly correlated with oil prices</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section-title">🎮 Interactive Pip Calculator</div>
+  <div class="tool-box">
+    <h4>See how pips and lot sizes affect your P&L</h4>
+    <div class="slider-row"><label>Pip movement</label><input type="range" min="1" max="100" value="20" id="pip-sl" oninput="calcPip()"><span class="slider-val" id="pip-v">20 pips</span></div>
+    <div class="slider-row"><label>Lot size</label>
+      <select id="lot-sel" onchange="calcPip()" style="background:var(--bg2);color:var(--text);border:1px solid var(--border);padding:6px 10px;border-radius:var(--radius-sm);font-size:13px">
+        <option value="100000">Standard (100,000)</option>
+        <option value="10000">Mini (10,000)</option>
+        <option value="1000" selected>Micro (1,000)</option>
+      </select>
+    </div>
+    <div class="metrics-grid">
+      <div class="metric-box"><div class="mlabel">Pip Value</div><div class="mval" id="pip-val" style="color:var(--blue)">$0.10</div></div>
+      <div class="metric-box"><div class="mlabel">Total P&L</div><div class="mval" id="pip-pnl" style="color:var(--green)">+$2.00</div></div>
+      <div class="metric-box"><div class="mlabel">If against you</div><div class="mval" id="pip-loss" style="color:var(--red)">-$2.00</div></div>
+    </div>
+    <div class="alert alert-blue" style="margin-top:14px;font-size:12px" id="pip-msg"></div>
+  </div>
+
+  <div class="alert alert-red"><strong>🚨 Biggest Beginner Mistake:</strong> Opening a live account with real money before understanding the basics. 70–80% of retail traders lose money. Always start on a demo account — no exceptions.</div>
+
+  <div class="section-title">✅ Your Action Plan</div>
+  <div class="card">
+    <ul class="checklist" id="cl-1">
+      <li onclick="tick(this)"><div class="chk-box"></div><div class="chk-text"><strong>Read Babypips Pre-School & Kindergarten</strong><span>babypips.com/learn/forex — the best free beginner course</span></div></li>
+      <li onclick="tick(this)"><div class="chk-box"></div><div class="chk-text"><strong>Open a FREE demo account</strong><span>IC Markets, XM, or Pepperstone — all free with virtual money</span></div></li>
+      <li onclick="tick(this)"><div class="chk-box"></div><div class="chk-text"><strong>Place 5 practice trades on EUR/USD</strong><span>Track how many pips you gained or lost on each</span></div></li>
+      <li onclick="tick(this)"><div class="chk-box"></div><div class="chk-text"><strong>Define pip, spread, and lot in your own words</strong><span>If you can explain it simply, you understand it</span></div></li>
+    </ul>
+  </div>
+
+  <div class="section-title">📚 Free Resources</div>
+  <div class="card">
+    <div class="res-item"><div class="res-icon">🐣</div><div class="res-body"><strong>Babypips School of Pipsology</strong><span>The best free, structured beginner course on the internet</span><a class="res-link" href="https://www.babypips.com/learn/forex" target="_blank">babypips.com/learn/forex →</a></div></div>
+    <div class="res-item"><div class="res-icon">📖</div><div class="res-body"><strong>Investopedia Forex</strong><span>Definitions and deep concept explanations</span><a class="res-link" href="https://www.investopedia.com/forex-4689676" target="_blank">investopedia.com/forex →</a></div></div>
+    <div class="res-item"><div class="res-icon">🎥</div><div class="res-body"><strong>Trading 212 YouTube Playlist</strong><span>Clear, visual forex basics — completely free</span><a class="res-link" href="https://www.youtube.com/@Trading212" target="_blank">YouTube: Trading 212 →</a></div></div>
+    <div class="res-item"><div class="res-icon">💻</div><div class="res-body"><strong>Free Demo Accounts</strong><span>IC Markets, XM, Pepperstone — all offer free demo with virtual money</span><a class="res-link" href="https://www.icmarkets.com" target="_blank">icmarkets.com →</a></div></div>
+  </div>
+  <div class="step-nav"><button class="btn btn-ghost" onclick="showPage('home')">← Home</button><button class="btn btn-primary" onclick="goStep(2)">Step 2: Charts →</button></div>
+</div>
+
+<!-- STEP 2 -->
+<div class="page" id="page-2">
+  <div class="step-header" style="background:linear-gradient(135deg,var(--green-l),#0a3d2b)">
+    <div class="step-label">Step 2 — Beginner</div>
+    <h2>Reading Charts & Price Action</h2>
+    <p>Candlesticks, trends, support & resistance</p>
+  </div>
+
+  <div class="card">
+    <h3>Candlestick Anatomy</h3>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:16px">A candlestick shows Open, High, Low, Close for any time period. Click any part below to learn what it tells you.</p>
+    <svg class="candle-svg" viewBox="0 0 480 300">
+      <!-- Bullish -->
+      <text x="100" y="18" text-anchor="middle" fill="#94A3B8" font-size="12">Bullish candle</text>
+      <line x1="100" y1="30" x2="100" y2="80" stroke="#1D9E75" stroke-width="2.5" stroke-linecap="round" style="cursor:pointer" onclick="showCandlePart('upper-wick')"/>
+      <rect x="68" y="80" width="64" height="110" rx="4" fill="#1D9E75" opacity=".85" style="cursor:pointer" onclick="showCandlePart('bull-body')"/>
+      <line x1="100" y1="190" x2="100" y2="250" stroke="#1D9E75" stroke-width="2.5" stroke-linecap="round" style="cursor:pointer" onclick="showCandlePart('lower-wick')"/>
+      <text x="100" y="138" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">Body</text>
+      <!-- Bearish -->
+      <text x="280" y="18" text-anchor="middle" fill="#94A3B8" font-size="12">Bearish candle</text>
+      <line x1="280" y1="30" x2="280" y2="80" stroke="#E24B4A" stroke-width="2.5" stroke-linecap="round" style="cursor:pointer" onclick="showCandlePart('upper-wick')"/>
+      <rect x="248" y="80" width="64" height="110" rx="4" fill="#E24B4A" opacity=".85" style="cursor:pointer" onclick="showCandlePart('bear-body')"/>
+      <line x1="280" y1="190" x2="280" y2="250" stroke="#E24B4A" stroke-width="2.5" stroke-linecap="round" style="cursor:pointer" onclick="showCandlePart('lower-wick')"/>
+      <text x="280" y="138" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">Body</text>
+      <!-- Labels -->
+      <line x1="140" y1="30" x2="165" y2="30" stroke="#374151" stroke-width="0.5" stroke-dasharray="3 3"/>
+      <text x="170" y="34" fill="#64748B" font-size="11">High</text>
+      <line x1="140" y1="80" x2="165" y2="80" stroke="#374151" stroke-width="0.5" stroke-dasharray="3 3"/>
+      <text x="170" y="84" fill="#64748B" font-size="11">Close (bullish)</text>
+      <line x1="140" y1="190" x2="165" y2="190" stroke="#374151" stroke-width="0.5" stroke-dasharray="3 3"/>
+      <text x="170" y="194" fill="#64748B" font-size="11">Open (bullish)</text>
+      <line x1="140" y1="250" x2="165" y2="250" stroke="#374151" stroke-width="0.5" stroke-dasharray="3 3"/>
+      <text x="170" y="254" fill="#64748B" font-size="11">Low</text>
+    </svg>
+    <div class="pattern-detail" id="candle-detail">Click any part of a candle above to learn what it tells you about price behaviour.</div>
+  </div>
+
+  <div class="section-title">Key Candlestick Patterns</div>
+  <div class="card">
+    <div class="pattern-grid" id="pattern-grid"></div>
+    <div class="pattern-detail" id="pattern-detail" style="margin-top:12px">Click any pattern card to learn what it means and how to trade it.</div>
+  </div>
+
+  <div class="section-title">Trends — The River of Price</div>
+  <div class="card">
+    <div class="tbl-wrap"><table>
+      <tr><th>Trend Type</th><th>Definition</th><th>Your Trading Rule</th></tr>
+      <tr><td><span class="tag tag-green">Uptrend</span></td><td>Higher Highs (HH) + Higher Lows (HL)</td><td>Only look for BUY setups</td></tr>
+      <tr><td><span class="tag tag-red">Downtrend</span></td><td>Lower Highs (LH) + Lower Lows (LL)</td><td>Only look for SELL setups</td></tr>
+      <tr><td><span class="tag" style="background:var(--bg4);color:var(--text2)">Sideways</span></td><td>Price bouncing between two horizontal levels</td><td>Wait for breakout or skip the pair</td></tr>
+    </table></div>
+  </div>
+
+  <div class="section-title">Support & Resistance</div>
+  <div class="card">
+    <p style="font-size:13px;color:var(--text2);margin-bottom:14px;line-height:1.7"><strong style="color:var(--text)">Support</strong> = price "floor" where buying historically stops declines. <strong style="color:var(--text)">Resistance</strong> = price "ceiling" where selling historically stops advances. A level is only valid if price has touched it <strong style="color:var(--amber)">at least twice</strong>. When resistance is broken, it often becomes new support — this "role reversal" is one of the most reliable patterns in all of forex.</p>
+    <svg viewBox="0 0 560 280" width="100%">
+      <rect x="0" y="0" width="560" height="280" fill="var(--bg3)" rx="8"/>
+      <line x1="30" y1="40" x2="530" y2="40" stroke="#E24B4A" stroke-width="1.5" stroke-dasharray="6 4"/>
+      <text x="536" y="44" fill="#E24B4A" font-size="11" font-weight="bold">Resistance</text>
+      <line x1="30" y1="160" x2="530" y2="160" stroke="#1D9E75" stroke-width="1.5" stroke-dasharray="6 4"/>
+      <text x="536" y="164" fill="#1D9E75" font-size="11" font-weight="bold">Support</text>
+      <polyline points="40,200 80,155 120,195 165,150 205,185 250,105 295,155 340,85 385,130 430,55 470,100 510,45" fill="none" stroke="#378ADD" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="250" cy="105" r="6" fill="none" stroke="#E24B4A" stroke-width="1.5"/><text x="250" y="93" text-anchor="middle" fill="#E24B4A" font-size="10">HH</text>
+      <circle cx="340" cy="85" r="6" fill="none" stroke="#E24B4A" stroke-width="1.5"/><text x="340" y="73" text-anchor="middle" fill="#E24B4A" font-size="10">HH</text>
+      <circle cx="430" cy="55" r="6" fill="none" stroke="#E24B4A" stroke-width="1.5"/><text x="430" y="43" text-anchor="middle" fill="#E24B4A" font-size="10">HH</text>
+      <circle cx="120" cy="195" r="6" fill="none" stroke="#1D9E75" stroke-width="1.5"/><text x="120" y="213" text-anchor="middle" fill="#1D9E75" font-size="10">HL</text>
+      <circle cx="205" cy="185" r="6" fill="none" stroke="#1D9E75" stroke-width="1.5"/><text x="205" y="203" text-anchor="middle" fill="#1D9E75" font-size="10">HL</text>
+      <circle cx="295" cy="155" r="6" fill="none" stroke="#1D9E75" stroke-width="1.5"/><text x="295" y="173" text-anchor="middle" fill="#1D9E75" font-size="10">HL</text>
+      <circle cx="385" cy="130" r="6" fill="none" stroke="#1D9E75" stroke-width="1.5"/><text x="385" y="148" text-anchor="middle" fill="#1D9E75" font-size="10">HL</text>
+      <text x="280" y="262" text-anchor="middle" fill="#378ADD" font-size="11" font-weight="bold">Uptrend: Higher Highs + Higher Lows</text>
+    </svg>
+  </div>
+
+  <div class="alert alert-red"><strong>🚨 Biggest Beginner Mistake:</strong> Seeing patterns everywhere (confirmation bias). One touch is NOT a support level — it's just a price. Require at least 2 clear bounces. Always zoom out to Daily before looking at 5-minute charts.</div>
+
+  <div class="card">
+    <h3>✅ Practice Exercise</h3>
+    <ul class="checklist">
+      <li onclick="tick(this)"><div class="chk-box"></div><div class="chk-text"><strong>Open EUR/USD Daily chart on TradingView (free)</strong><span>Draw horizontal lines at obvious recent highs and lows</span></div></li>
+      <li onclick="tick(this)"><div class="chk-box"></div><div class="chk-text"><strong>Switch to 4H — is it making HH+HL or LH+LL?</strong><span>Identify the current trend direction</span></div></li>
+      <li onclick="tick(this)"><div class="chk-box"></div><div class="chk-text"><strong>Find 3 bounces off S/R in last 30 candles</strong><span>Did price bounce or break through each time?</span></div></li>
+      <li onclick="tick(this)"><div class="chk-box"></div><div class="chk-text"><strong>Do this daily for ONE week — do not trade yet</strong><span>Observation and pattern recognition before execution</span></div></li>
+    </ul>
+  </div>
+  <div class="step-nav"><button class="btn btn-ghost" onclick="goStep(1)">← Step 1</button><button class="btn btn-primary" onclick="goStep(3)">Step 3: Indicators →</button></div>
+</div>
+
+<!-- STEP 3 -->
+<div class="page" id="page-3">
+  <div class="step-header" style="background:linear-gradient(135deg,var(--purple-l),#1a0f50)">
+    <div class="step-label">Step 3 — Beginner</div>
+    <h2>Technical Analysis & Indicators</h2>
+    <p>Moving averages, RSI, MACD, Bollinger Bands</p>
+  </div>
+
+  <div class="alert alert-amber"><strong>⚠️ Important:</strong> Indicators are NOT crystal balls. They lag behind price and give false signals regularly. Maximum 2–3 indicators measuring DIFFERENT things. Never duplicate (RSI + Stochastic = both momentum = useless together).</div>
+
+  <div class="section-title">🎮 Moving Average Explorer</div>
+  <div class="tool-box">
+    <h4>Drag the sliders to see how EMA crossovers work</h4>
+    <div class="slider-row"><label>Fast EMA period</label><input type="range" min="5" max="30" value="10" id="fast-sl" oninput="updateMA()"><span class="slider-val" id="fast-v">10</span></div>
+    <div class="slider-row"><label>Slow EMA period</label><input type="range" min="20" max="60" value="30" id="slow-sl" oninput="updateMA()"><span class="slider-val" id="slow-v">30</span></div>
+    <div style="position:relative;height:220px;margin-top:12px"><canvas id="maChart"></canvas></div>
+    <div class="alert alert-blue" style="margin-top:10px;font-size:12px" id="ma-signal"></div>
+  </div>
+
+  <div class="section-title">The Four Essential Indicators</div>
+  <div class="card">
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="showIndTab('ema',this)">Moving Avg (EMA)</button>
+      <button class="tab-btn" onclick="showIndTab('rsi',this)">RSI</button>
+      <button class="tab-btn" onclick="showIndTab('macd',this)">MACD</button>
+      <button class="tab-btn" onclick="showIndTab('bb',this)">Bollinger Bands</button>
+    </div>
+    <div class="tab-panel active" id="ind-ema">
+      <div class="grid2">
+        <div><h4>What it measures</h4><p style="font-size:13px;color:var(--text2)">Trend direction. The 200 EMA is the most important line on any chart. Price above it = bullish. Price below it = bearish. The 20/50 EMA crossover gives entry signals.</p></div>
+        <div><h4>Key signals</h4><p style="font-size:13px;color:var(--text2)"><span class="tag tag-green">Golden cross</span> Fast EMA crosses above slow = buy signal.<br><br><span class="tag tag-red">Death cross</span> Fast EMA crosses below slow = sell signal.</p></div>
+      </div>
+      <div class="alert alert-green" style="margin-top:12px"><strong>Pro tip:</strong> NEVER trade against the 200 EMA. If price is below it, only look for short setups. If above, only longs.</div>
+    </div>
+    <div class="tab-panel" id="ind-rsi">
+      <div class="grid2">
+        <div><h4>What it measures</h4><p style="font-size:13px;color:var(--text2)">Momentum. Oscillates between 0–100. Above 70 = overbought (buyers exhausted). Below 30 = oversold (sellers exhausted). Best setting: RSI(14).</p></div>
+        <div><h4>Advanced: Divergence</h4><p style="font-size:13px;color:var(--text2)">Price makes new HIGH but RSI makes LOWER HIGH → momentum weakening → reversal likely. One of the most reliable signals in all of technical analysis.</p></div>
+      </div>
+      <div class="alert alert-amber" style="margin-top:12px"><strong>Warning:</strong> In a strong trend, RSI can stay above 70 (or below 30) for a LONG time. Don't sell just because RSI is 72. Confirm with trend direction first.</div>
+    </div>
+    <div class="tab-panel" id="ind-macd">
+      <div class="grid2">
+        <div><h4>What it measures</h4><p style="font-size:13px;color:var(--text2)">Trend + momentum combined. Built from 12/26 EMA difference, plotted with a 9-period signal line. The histogram shows the gap between them — watch for histogram bars shrinking to zero.</p></div>
+        <div><h4>Key signals</h4><p style="font-size:13px;color:var(--text2)">MACD line crosses above signal line → bullish momentum building.<br><br>Histogram bars flip from negative to positive → momentum has shifted.</p></div>
+      </div>
+      <div class="alert alert-blue" style="margin-top:12px"><strong>Pro tip:</strong> Use MACD as CONFIRMATION, not a standalone signal. It lags — by the time it crosses, price may have already moved significantly.</div>
+    </div>
+    <div class="tab-panel" id="ind-bb">
+      <div class="grid2">
+        <div><h4>What it measures</h4><p style="font-size:13px;color:var(--text2)">Volatility. Three lines: 20-period SMA in the middle, two bands set 2 standard deviations above and below. Bands expand in high volatility, contract in low volatility.</p></div>
+        <div><h4>The Squeeze</h4><p style="font-size:13px;color:var(--text2)">When bands narrow tightly = low volatility consolidation about to end. An explosive breakout is coming. Use another indicator to confirm the direction of the breakout.</p></div>
+      </div>
+      <div class="alert alert-green" style="margin-top:12px"><strong>Pro tip:</strong> Price can "walk the band" in a strong trend — touching the upper band repeatedly without reversing. Band touch alone is NOT a sell signal.</div>
+    </div>
+  </div>
+
+  <div class="section-title">Confluence — The Professional Edge</div>
+  <div class="card" style="padding:0"><div class="tbl-wrap"><table>
+    <tr><th>Combination</th><th>What Each Confirms</th><th>Best Used For</th></tr>
+    <tr><td>200 EMA + RSI</td><td>Trend direction + entry timing (oversold in uptrend)</td><td>Pullback entries</td></tr>
+    <tr><td>EMA cross + MACD</td><td>Trend signal + momentum confirmation</td><td>New trend trades</td></tr>
+    <tr><td>Bollinger Bands + RSI</td><td>Volatility extreme + momentum exhaustion</td><td>Range trading</td></tr>
+    <tr><td>BB Squeeze + MACD</td><td>Pre-breakout condition + directional confirmation</td><td>Breakout trades</td></tr>
+  </table></div></div>
+
+  <div class="alert alert-red"><strong>🚨 Biggest Beginner Mistake:</strong> Indicator overload. 6–8 indicators on one chart = a rainbow of confusion. The rule: maximum 2–3 that each measure something DIFFERENT. One trend (EMA), one momentum (RSI), one volatility (Bollinger Bands).</div>
+
+  <div class="step-nav"><button class="btn btn-ghost" onclick="goStep(2)">← Step 2</button><button class="btn btn-primary" onclick="goStep(4)">Step 4: Strategy →</button></div>
+</div>
+
+<!-- STEP 4 -->
+<div class="page" id="page-4">
+  <div class="step-header" style="background:linear-gradient(135deg,var(--blue-l),#0a2a50)">
+    <div class="step-label">Step 4 — Intermediate</div>
+    <h2>Building a Trading Strategy</h2>
+    <p>Entry/exit rules, timeframes, backtesting</p>
+  </div>
+
+  <div class="card"><p style="font-size:14px;color:var(--text2);line-height:1.8">A strategy means <strong style="color:var(--text)">written rules for every decision</strong> before you open a chart. No improvising. No gut feelings. A 45% win-rate strategy with 1:3 R:R <em>prints money</em>. A prediction approach with no rules loses money even when you're right more than wrong.</p></div>
+
+  <div class="section-title">The EMA Pullback Strategy — Your Complete Playbook</div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+      <span class="tag tag-blue">Beginner–Intermediate</span>
+      <span style="font-size:13px;color:var(--text2)">EUR/USD, GBP/USD, USD/JPY · 4H + 1H Timeframes</span>
+    </div>
+    <h4 style="color:var(--text2);margin-bottom:10px">Setup Requirements</h4>
+    <div class="tbl-wrap"><table>
+      <tr><th>Parameter</th><th>Rule</th></tr>
+      <tr><td>Pairs</td><td>EUR/USD, GBP/USD, USD/JPY — major pairs only (tightest spreads)</td></tr>
+      <tr><td>Timeframe</td><td>4H chart for setup identification · 1H for entry refinement</td></tr>
+      <tr><td>Session</td><td>London (8am–12pm GMT) or New York (1pm–5pm GMT)</td></tr>
+      <tr><td>Avoid</td><td>Friday after 5pm GMT · NFP · CPI · Central bank rate decisions</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h3>Entry Checklist — ALL Must Be True</h3>
+    <ul class="checklist" id="entry-cl">
+      <li onclick="tick(this)"><div class="chk-box"></div><div class="chk-text"><strong>Price is ABOVE the 200 EMA on the 4H chart</strong><span>Bullish bias confirmed — only take long (buy) trades</span></div></li>
+      <li onclick="tick(this)"><div class="chk-box"></div><div class="chk-text"><strong>The 200 EMA is visibly sloping UPWARD (not flat)</strong><span>Flat EMA = no trend = no trade</span></div></li>
+      <li onclick="tick(this)"><div class="chk-box"></div><div class="chk-text"><strong>Price has pulled back at least 30 pips from a recent swing high</strong><span>Toward the EMA zone — this is your entry window</span></div></li>
+      <li onclick="tick(this)"><div class="chk-box"></div><div class="chk-text"><strong>RSI(14) dipped BELOW 50 during the pullback (ideally 40–45)</strong><span>Sellers losing momentum — setup is almost ready</span></div></li>
+      <li onclick="tick(this)"><div class="chk-box"></div><div class="chk-text"><strong>RSI is now TURNING BACK UP</strong><span>Current RSI value is higher than the previous candle's RSI</span></div></li>
+      <li onclick="tick(this)"><div class="chk-box"></div><div class="chk-text"><strong>A BULLISH CONFIRMATION candle closes near EMA zone</strong><span>Engulfing, hammer, or strong green body — this is your trigger</span></div></li>
+    </ul>
+    <div id="entry-status" class="alert alert-blue" style="margin-top:12px;font-size:12px">Tick all 6 conditions above. If any is missing — no trade.</div>
+  </div>
+
+  <div class="section-title">🎮 R:R Math Simulator</div>
+  <div class="tool-box">
+    <h4>See why win rate alone doesn't determine profitability</h4>
+    <div class="slider-row"><label>Win rate</label><input type="range" min="20" max="80" value="45" id="wr-sl" oninput="calcRR()"><span class="slider-val" id="wr-v">45%</span></div>
+    <div class="slider-row"><label>Risk:Reward (1:X)</label><input type="range" min="1" max="5" value="2" step="0.5" id="rr-sl" oninput="calcRR()"><span class="slider-val" id="rr-v">1:2</span></div>
+    <div class="slider-row"><label>Number of trades</label><input type="range" min="10" max="50" value="20" step="5" id="tr-sl" oninput="calcRR()"><span class="slider-val" id="tr-v">20</span></div>
+    <div class="metrics-grid">
+      <div class="metric-box"><div class="mlabel">Expected Wins</div><div class="mval" id="rr-wins" style="color:var(--green)">9</div></div>
+      <div class="metric-box"><div class="mlabel">Expected Losses</div><div class="mval" id="rr-losses" style="color:var(--red)">11</div></div>
+      <div class="metric-box"><div class="mlabel">Net Result</div><div class="mval" id="rr-net">+7R</div></div>
+      <div class="metric-box"><div class="mlabel">Expectancy</div><div class="mval" id="rr-exp">+0.35R</div></div>
+    </div>
+    <div class="alert" id="rr-msg" style="margin-top:12px;font-size:12px"></div>
+  </div>
+
+  <div class="section-title">Backtesting — The Step Everyone Skips</div>
+  <div class="card">
+    <p style="font-size:13px;color:var(--text2);margin-bottom:14px;line-height:1.7">Before trading on demo, scroll back 3–6 months on EUR/USD 4H and manually test your rules. Use TradingView's free Replay Mode (clock button in toolbar). Minimum <strong style="color:var(--amber)">30 historical trades</strong>.</p>
+    <ul class="checklist">
+      <li onclick="tick(this)"><div class="chk-box"></div><div class="chk-text"><strong>Use TradingView Replay Mode (free)</strong><span>Press the replay/clock button in the top toolbar — advance candle by candle</span></div></li>
+      <li onclick="tick(this)"><div class="chk-box"></div><div class="chk-text"><strong>Log 30+ historical trades in a spreadsheet</strong><span>Date, entry, SL, TP, result in R, was the setup valid?</span></div></li>
+      <li onclick="tick(this)"><div class="chk-box"></div><div class="chk-text"><strong>Calculate win rate and expectancy</strong><span>(Win Rate × Avg Win) − (Loss Rate × Avg Loss) must be positive</span></div></li>
+      <li onclick="tick(this)"><div class="chk-box"></div><div class="chk-text"><strong>Only proceed to demo trading after positive backtest results</strong><span>This is your proof of edge — don't skip it</span></div></li>
+    </ul>
+  </div>
+
+  <div class="alert alert-red"><strong>🚨 Biggest Beginner Mistake:</strong> Skipping backtesting and going straight to live trading. Every trader who blows their first account traded real money before truly knowing their strategy.</div>
+
+  <div class="step-nav"><button class="btn btn-ghost" onclick="goStep(3)">← Step 3</button><button class="btn btn-primary" onclick="goStep(5)">Step 5: Risk Management →</button></div>
+</div>
+
+<!-- STEP 5 -->
+<div class="page" id="page-5">
+  <div class="step-header" style="background:linear-gradient(135deg,var(--blue-l),#0a2a50)">
+    <div class="step-label">Step 5 — Intermediate</div>
+    <h2>Risk & Money Management</h2>
+    <p>Stop-loss, position sizing, risk-reward ratio, trade journal</p>
+  </div>
+
+  <div class="card"><p style="font-size:14px;color:var(--text2);line-height:1.8">Risk management is the <strong style="color:var(--text)">only reason traders survive</strong> long enough to become profitable. A brilliant strategy with poor risk management will blow up. Professionals think about potential LOSS first — always.</p></div>
+
+  <div class="section-title">🎮 Drawdown Survival Calculator</div>
+  <div class="tool-box">
+    <h4>See how losing streaks compound — the math is brutal</h4>
+    <div class="slider-row"><label>Risk per trade</label><input type="range" min="1" max="10" value="2" id="rpt-sl" oninput="calcDD()"><span class="slider-val" id="rpt-v">2%</span></div>
+    <div class="slider-row"><label>Consecutive losses</label><input type="range" min="1" max="15" value="5" id="cl-sl" oninput="calcDD()"><span class="slider-val" id="cl-v">5</span></div>
+    <div class="metrics-grid">
+      <div class="metric-box"><div class="mlabel">Account Remaining</div><div class="mval" id="dd-rem" style="color:var(--green)">90.4%</div></div>
+      <div class="metric-box"><div class="mlabel">Capital Lost</div><div class="mval" id="dd-lost" style="color:var(--red)">9.6%</div></div>
+      <div class="metric-box"><div class="mlabel">Gain to Recover</div><div class="mval" id="dd-recover" style="color:var(--amber)">10.6%</div></div>
+    </div>
+    <div class="alert" id="dd-msg" style="margin-top:12px;font-size:12px"></div>
+  </div>
+
+  <div class="section-title">🎮 Position Size Calculator</div>
+  <div class="tool-box">
+    <h4>Calculate your exact lot size before every trade — never guess</h4>
+    <div class="slider-row"><label>Account balance ($)</label><input type="range" min="200" max="10000" value="1000" step="100" id="bal-sl" oninput="calcPos()"><span class="slider-val" id="bal-v">$1,000</span></div>
+    <div class="slider-row"><label>Risk per trade (%)</label><input type="range" min="0.5" max="5" value="1" step="0.5" id="risk-sl" oninput="calcPos()"><span class="slider-val" id="risk-v">1%</span></div>
+    <div class="slider-row"><label>Stop loss (pips)</label><input type="range" min="10" max="100" value="40" step="5" id="stop-sl" oninput="calcPos()"><span class="slider-val" id="stop-v">40 pips</span></div>
+    <div class="metrics-grid">
+      <div class="metric-box"><div class="mlabel">Risk Amount</div><div class="mval" id="ps-risk" style="color:var(--red)">$10</div></div>
+      <div class="metric-box"><div class="mlabel">Lot Size</div><div class="mval" id="ps-lots" style="color:var(--blue)">0.025</div></div>
+      <div class="metric-box"><div class="mlabel">Lot Type</div><div class="mval" id="ps-type" style="font-size:15px">Micro</div></div>
+    </div>
+    <div class="formula" style="margin-top:14px" id="ps-formula">Lots = ($1,000 × 1%) ÷ (40 pips × $1) = 0.025 lots</div>
+  </div>
+
+  <div class="section-title">🎮 Equity Curve Simulator</div>
+  <div class="tool-box">
+    <h4>Same trades, same wins, same losses — only risk % differs</h4>
+    <div style="position:relative;height:220px"><canvas id="eqChart"></canvas></div>
+    <div class="grid2" style="margin-top:12px">
+      <div class="metric-box"><div class="mlabel">Disciplined (1% risk)</div><div class="mval" style="color:var(--green)" id="eq-disc">+6.8%</div></div>
+      <div class="metric-box"><div class="mlabel">Undisciplined (5% risk)</div><div class="mval" style="color:var(--red)" id="eq-undisc">-18.4%</div></div>
+    </div>
+  </div>
+
+  <div class="section-title">Trade Journal — 7 Essential Fields</div>
+  <div class="card" style="padding:0"><div class="tbl-wrap"><table>
+    <tr><th>Field</th><th>Why It Matters</th></tr>
+    <tr><td><strong>Date & Pair</strong></td><td>Track which pairs and sessions you perform best on</td></tr>
+    <tr><td><strong>Setup Type</strong></td><td>Was it a valid signal or did you bend the rules?</td></tr>
+    <tr><td><strong>Entry, SL, TP</strong></td><td>Verify you followed your plan exactly</td></tr>
+    <tr><td><strong>Result in R</strong></td><td>Measure in R units — makes results comparable regardless of account size</td></tr>
+    <tr><td><strong>Emotion Score (1–10)</strong></td><td>1=calm, 10=desperate. Best trades happen at score 1–4.</td></tr>
+    <tr><td><strong>Followed every rule? (Y/N)</strong></td><td>No partial credit. Honesty is everything.</td></tr>
+    <tr><td><strong>One thing to improve</strong></td><td>Specific — not "do better." What exactly will you change?</td></tr>
+  </table></div></div>
+
+  <div class="alert alert-red"><strong>🚨 Biggest Beginner Mistake:</strong> The Martingale trap — doubling position size after losses to recover faster. This is the fastest way to destroy an account. Risk % NEVER changes based on recent results. Win or lose — 1% is 1%. Always.</div>
+
+  <div class="step-nav"><button class="btn btn-ghost" onclick="goStep(4)">← Step 4</button><button class="btn btn-primary" onclick="goStep(6)">Step 6: Psychology →</button></div>
+</div>
+
+<!-- STEP 6 -->
+<div class="page" id="page-6">
+  <div class="step-header" style="background:linear-gradient(135deg,var(--amber-l),#3d2a00)">
+    <div class="step-label">Step 6 — Advanced</div>
+    <h2>Trading Psychology</h2>
+    <p>Discipline, FOMO, revenge trading, pre-trade routine</p>
+  </div>
+
+  <div class="card"><p style="font-size:14px;color:var(--text2);line-height:1.8">You are your own biggest enemy. Not the market, not your broker. <strong style="color:var(--text)">YOU.</strong> You can have a backtested strategy, perfect position sizing, a complete playbook — and still lose money. Because the moment real emotions enter the picture, rational rules become very difficult to follow.</p></div>
+
+  <div class="section-title">The 6 Psychological Traps</div>
+  <div class="card">
+    <div class="trap-grid" id="trap-grid"></div>
+    <div class="trap-detail" id="trap-detail">Click any trap above to understand why it happens — and the exact fix.</div>
+  </div>
+
+  <div class="section-title">The Professional Mindset</div>
+  <div class="card">
+    <div class="grid2">
+      <div style="background:var(--bg3);border-radius:var(--radius-sm);padding:16px;border:1px solid var(--red-l)">
+        <div style="font-size:11px;color:var(--red);font-weight:700;margin-bottom:8px;letter-spacing:.5px">BEGINNER THINKS</div>
+        <p style="font-size:14px;font-style:italic;">"Will this trade win?"</p>
+      </div>
+      <div style="background:var(--bg3);border-radius:var(--radius-sm);padding:16px;border:1px solid var(--green-l)">
+        <div style="font-size:11px;color:var(--green);font-weight:700;margin-bottom:8px;letter-spacing:.5px">PROFESSIONAL THINKS</div>
+        <p style="font-size:14px;font-style:italic;">"If I execute this correctly 50 times, the statistics will produce profit."</p>
+      </div>
+    </div>
+    <div class="alert alert-green" style="margin-top:14px">A <strong>loss on a valid setup</strong> is NOT failure — it is one data point in a statistical series. You followed your rules. That IS success. A <strong>win on an invalid setup</strong> is dangerous — it rewards rule-breaking.</div>
+  </div>
+
+  <div class="section-title">✅ Pre-Trade Routine Checklist</div>
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+      <span style="font-size:13px;font-weight:600">Complete ALL items before every session</span>
+      <span style="font-size:12px;color:var(--text3)" id="routine-prog">0/10 complete</span>
+    </div>
+    <div class="progress-wrap"><div class="progress-fill" id="routine-fill" style="width:0%;background:var(--green)"></div></div>
+    <div style="font-size:11px;font-weight:700;color:var(--purple);letter-spacing:.6px;margin-bottom:8px">PHASE 1 — MENTAL STATE (2 min)</div>
+    <ul class="checklist" id="routine-cl">
+      <li onclick="tickRoutine(this)"><div class="chk-box"></div><div class="chk-text"><strong>Am I calm, well-rested, and emotionally neutral?</strong><span>If tired, angry, or distracted — close charts and come back tomorrow</span></div></li>
+      <li onclick="tickRoutine(this)"><div class="chk-box"></div><div class="chk-text"><strong>No significant emotional event in the last hour?</strong><span>Argument, bad news, stress = do not trade today</span></div></li>
+    </ul>
+    <div style="font-size:11px;font-weight:700;color:var(--blue);letter-spacing:.6px;margin:14px 0 8px">PHASE 2 — MARKET CONTEXT (5 min)</div>
+    <ul class="checklist" id="routine-cl2">
+      <li onclick="tickRoutine(this)"><div class="chk-box"></div><div class="chk-text"><strong>Checked ForexFactory for red-folder events today</strong><span>NFP, CPI, or rate decision in next 2 hours = DO NOT TRADE</span></div></li>
+      <li onclick="tickRoutine(this)"><div class="chk-box"></div><div class="chk-text"><strong>Reviewed Daily chart — 200 EMA direction confirmed</strong><span>What is the overall bias? Where is the nearest S/R?</span></div></li>
+      <li onclick="tickRoutine(this)"><div class="chk-box"></div><div class="chk-text"><strong>Market is trending (not ranging sideways)</strong><span>EMA Pullback strategy works in trends — in a range, wait for breakout</span></div></li>
+    </ul>
+    <div style="font-size:11px;font-weight:700;color:var(--green);letter-spacing:.6px;margin:14px 0 8px">PHASE 3 — SETUP VALIDATION (5 min)</div>
+    <ul class="checklist" id="routine-cl3">
+      <li onclick="tickRoutine(this)"><div class="chk-box"></div><div class="chk-text"><strong>Valid setup forming on my watchlist?</strong><span>No setup = no trade. A day with no trade is a perfectly executed day.</span></div></li>
+      <li onclick="tickRoutine(this)"><div class="chk-box"></div><div class="chk-text"><strong>ALL 6 entry checklist criteria are met</strong><span>No exceptions. Not 5 out of 6. ALL of them.</span></div></li>
+      <li onclick="tickRoutine(this)"><div class="chk-box"></div><div class="chk-text"><strong>Stop loss level identified on the chart</strong><span>Below the swing low with 5–10 pip buffer</span></div></li>
+    </ul>
+    <div style="font-size:11px;font-weight:700;color:var(--red);letter-spacing:.6px;margin:14px 0 8px">PHASE 4 — RISK CHECK (2 min)</div>
+    <ul class="checklist" id="routine-cl4">
+      <li onclick="tickRoutine(this)"><div class="chk-box"></div><div class="chk-text"><strong>Position size calculated at exactly 1% risk</strong><span>If lot size feels tiny — good. That feeling is your ego, not your strategy.</span></div></li>
+      <li onclick="tickRoutine(this)"><div class="chk-box"></div><div class="chk-text"><strong>I have NOT already taken 2 trades today</strong><span>2 trades per day maximum. Session over if both stop out.</span></div></li>
+    </ul>
+    <div class="alert alert-green" id="routine-gate" style="display:none;margin-top:12px"><strong>✅ All checks passed.</strong> You are clear to execute. Place your order with entry, stop, and target already set — then step away from the screen.</div>
+  </div>
+
+  <div class="alert alert-red"><strong>🚨 Biggest Beginner Mistake:</strong> Thinking psychology only matters for "emotional" people. Every trader has emotional responses to loss. You don't need to eliminate emotion — you need systems that work correctly even WHEN emotion is present.</div>
+
+  <div class="section-title">📚 Essential Psychology Resources</div>
+  <div class="card">
+    <div class="res-item"><div class="res-icon">📗</div><div class="res-body"><strong>Trading in the Zone — Mark Douglas</strong><span>The single most important trading psychology book ever written. Read it twice.</span></div></div>
+    <div class="res-item"><div class="res-icon">📘</div><div class="res-body"><strong>The Disciplined Trader — Mark Douglas</strong><span>Earlier companion volume — equally essential</span></div></div>
+    <div class="res-item"><div class="res-icon">🎥</div><div class="res-body"><strong>SMB Capital YouTube</strong><span>Professional traders discussing the mental side of trading openly and honestly</span><a class="res-link" href="https://www.youtube.com/@smbcapital" target="_blank">youtube.com/@smbcapital →</a></div></div>
+    <div class="res-item"><div class="res-icon">📊</div><div class="res-body"><strong>ForexFactory Journal Section</strong><span>Read other traders' journals to recognise patterns in your own behaviour</span><a class="res-link" href="https://www.forexfactory.com/forum/journals" target="_blank">forexfactory.com/journals →</a></div></div>
+  </div>
+
+  <div class="step-nav"><button class="btn btn-ghost" onclick="goStep(5)">← Step 5</button><button class="btn btn-primary" onclick="goStep(7)">Step 7: Advanced Mastery →</button></div>
+</div>
+
+<!-- STEP 7 -->
+<div class="page" id="page-7">
+  <div class="step-header" style="background:linear-gradient(135deg,var(--red-l),#3d0a0a)">
+    <div class="step-label">Step 7 — Master</div>
+    <h2>Advanced Mastery</h2>
+    <p>Fundamentals, macro analysis, intermarket, going live</p>
+  </div>
+
+  <div class="card"><p style="font-size:14px;color:var(--text2);line-height:1.8">Advanced traders don't choose between technical and fundamental analysis — they use <strong style="color:var(--text)">both together</strong>. Fundamentals tell you the direction the river is flowing. Technicals tell you exactly where to step in. This is where all 7 steps converge.</p></div>
+
+  <div class="section-title">Fundamental Analysis</div>
+  <div class="card">
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="showF7Tab('rates',this)">Interest Rates</button>
+      <button class="tab-btn" onclick="showF7Tab('cpi',this)">Inflation (CPI)</button>
+      <button class="tab-btn" onclick="showF7Tab('nfp',this)">Employment</button>
+      <button class="tab-btn" onclick="showF7Tab('cb',this)">Central Banks</button>
+    </div>
+    <div class="tab-panel active" id="f7-rates">
+      <p style="font-size:13px;color:var(--text2);line-height:1.7">Interest rates are the <strong style="color:var(--amber)">single most powerful fundamental driver</strong> of any currency pair. Money flows to where it earns the highest return. When a central bank raises rates, foreign capital pours in to earn better yields → currency appreciates. Always ask: <em>which country has higher rates, and is that rising or falling?</em></p>
+      <div class="tbl-wrap" style="margin-top:12px"><table>
+        <tr><th>Scenario</th><th>Currency Impact</th></tr>
+        <tr><td>Country A raises rates</td><td><span class="tag tag-green">Bullish</span> Currency A strengthens vs all peers</td></tr>
+        <tr><td>Country A cuts rates</td><td><span class="tag tag-red">Bearish</span> Currency A weakens vs all peers</td></tr>
+        <tr><td>Rate hike expected (not yet announced)</td><td><span class="tag tag-green">Bullish</span> Markets price it in advance — buy the rumour</td></tr>
+        <tr><td>Hike disappoints (smaller than expected)</td><td><span class="tag tag-red">Bearish</span> "Sell the fact" — market was positioned for more</td></tr>
+      </table></div>
+    </div>
+    <div class="tab-panel" id="f7-cpi">
+      <p style="font-size:13px;color:var(--text2);line-height:1.7">CPI (Consumer Price Index) measures inflation. Central banks have a target — usually 2%. When CPI is <strong style="color:var(--text)">above target</strong>, the central bank is likely to raise rates to cool the economy → bullish for that currency. When CPI is <strong style="color:var(--text)">below target</strong>, rate cuts may be needed → bearish. Watch the monthly CPI release — it's a market mover.</p>
+    </div>
+    <div class="tab-panel" id="f7-nfp">
+      <p style="font-size:13px;color:var(--text2);line-height:1.7">US Non-Farm Payrolls (NFP) is released the <strong style="color:var(--amber)">first Friday of every month</strong> at 8:30am EST. It is the most market-moving scheduled event in all of forex. Strong jobs data → healthy economy → Fed likely to keep rates high → USD bullish. Weak data → USD bearish. <strong style="color:var(--red)">Do NOT trade in the 30 minutes before or after NFP until you're experienced.</strong></p>
+    </div>
+    <div class="tab-panel" id="f7-cb">
+      <div class="tbl-wrap"><table>
+        <tr><th>Central Bank</th><th>Currency</th><th>Key Pairs</th><th>Watch For</th></tr>
+        <tr><td><strong>Fed (US)</strong></td><td>USD</td><td>EUR/USD, GBP/USD, USD/JPY</td><td>FOMC (8x/year), dot plot, Chair press conferences</td></tr>
+        <tr><td><strong>ECB</strong></td><td>EUR</td><td>EUR/USD, EUR/GBP</td><td>Lagarde press conferences, ECB meetings</td></tr>
+        <tr><td><strong>BoE</strong></td><td>GBP</td><td>GBP/USD, EUR/GBP</td><td>MPC meetings, quarterly policy report</td></tr>
+        <tr><td><strong>BoJ</strong></td><td>JPY</td><td>USD/JPY, GBP/JPY</td><td>Surprise interventions — JPY is safe haven</td></tr>
+        <tr><td><strong>RBA</strong></td><td>AUD</td><td>AUD/USD</td><td>RBA meetings + Chinese PMI data</td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section-title">Intermarket Analysis</div>
+  <div class="card" style="padding:0"><div class="tbl-wrap"><table>
+    <tr><th>Market Event</th><th>Currency Impact</th><th>Why</th></tr>
+    <tr><td>🟢 Risk-on sentiment</td><td>AUD, NZD, GBP ↑ · JPY, CHF ↓</td><td>Capital flows to higher-yielding currencies</td></tr>
+    <tr><td>🔴 Risk-off / fear</td><td>JPY, CHF, USD ↑ · AUD, NZD ↓</td><td>Capital flees to safe havens</td></tr>
+    <tr><td>🛢️ Oil prices rise</td><td>CAD ↑ · JPY ↓</td><td>Canada exports oil; Japan imports almost all its oil</td></tr>
+    <tr><td>🥇 Gold prices rise</td><td>AUD ↑ · USD often ↓</td><td>Australia is a top gold producer</td></tr>
+    <tr><td>📈 US bond yields rise</td><td>USD ↑ broadly</td><td>Higher US yields attract global capital</td></tr>
+    <tr><td>🏭 Strong China data</td><td>AUD, NZD ↑</td><td>China is the world's largest commodity consumer</td></tr>
+  </table></div></div>
+
+  <div class="section-title">Advanced Price Action Concepts</div>
+  <div class="card">
+    <div class="accord" id="acc-ob"><div class="accord-head" onclick="toggleAcc('ob')"><span>Order Blocks — Where Institutional Orders Live</span><span class="arr">›</span></div><div class="accord-body" id="ab-ob">The <strong>last bullish or bearish candle before a significant price move</strong> away from a level. Institutions place large orders here. Price often returns to these zones for a second fill. <em>Bullish order block</em> = last down candle before a strong up move. <em>Bearish order block</em> = last up candle before a strong drop. These zones act as high-probability support/resistance.</div></div>
+    <div class="accord" id="acc-fvg"><div class="accord-head" onclick="toggleAcc('fvg')"><span>Fair Value Gaps — Imbalances Markets Fill</span><span class="arr">›</span></div><div class="accord-body" id="ab-fvg">A <strong>three-candle pattern where the wicks of candle 1 and candle 3 don't overlap</strong>. Price moved so fast it left a "gap" in market structure — an area where buyers and sellers never traded fairly. Markets tend to return to fill these gaps before continuing. High-probability entry zones when aligned with trend direction.</div></div>
+    <div class="accord" id="acc-ls"><div class="accord-head" onclick="toggleAcc('ls')"><span>Liquidity Sweeps — Where Stops Get Hunted</span><span class="arr">›</span></div><div class="accord-body" id="ab-ls">Retail traders' stop losses cluster just below swing lows and above swing highs. <strong>Institutions deliberately push price through these levels to trigger those stops</strong>, creating liquidity they need to fill their own large orders, then immediately reverse. Watch for: a sharp spike through a key level followed by a strong reversal candle. Trade the reversal after the sweep is confirmed.</div></div>
+    <div class="accord" id="acc-mss"><div class="accord-head" onclick="toggleAcc('mss')"><span>Market Structure Shifts — Earliest Reversal Signal</span><span class="arr">›</span></div><div class="accord-body" id="ab-mss">In an uptrend (HH + HL), a <strong>market structure shift (MSS) occurs when price breaks below the most recent higher low</strong> with a strong candle. This is the earliest warning that the trend is changing — earlier than any moving average crossover. Gives you better entries at trend transitions.</div></div>
+    <div class="accord" id="acc-kz"><div class="accord-head" onclick="toggleAcc('kz')"><span>Session Killzones — When Institutions Are Active</span><span class="arr">›</span></div><div class="accord-body" id="ab-kz">Institutional activity clusters in specific time windows: <strong>London open (7–9am GMT)</strong>, <strong>New York open (12–2pm GMT)</strong>, and the London/NY overlap (12–4pm GMT). The Asian session (midnight–6am GMT) is typically low volatility and often sets up liquidity that London and NY then sweep. Target these killzone windows for your setups.</div></div>
+  </div>
+
+  <div class="section-title">The Advanced Weekly Workflow</div>
+  <div class="card">
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-dot" style="background:var(--red);border-color:var(--red)"></div><h4>Sunday — Macro Review (20 min)</h4><p>Check ForexFactory for high-impact events. Read latest central bank statement for your pairs. Write your fundamental bias for EUR, USD, GBP this week.</p></div>
+      <div class="tl-item"><div class="tl-dot" style="background:var(--blue);border-color:var(--blue)"></div><h4>Each Morning — Daily Bias (10 min)</h4><p>Open the Daily chart. Does the technical picture align with your fundamental bias? If fundamentals say USD bullish AND Daily chart shows USD/JPY above 200 EMA in uptrend — perfect confluence.</p></div>
+      <div class="tl-item"><div class="tl-dot" style="background:var(--green);border-color:var(--green)"></div><h4>During Session — Technical Entry</h4><p>Drop to 4H chart. Wait for your EMA Pullback rules in the direction of confirmed bias. You're now trading a chart pattern that aligns with macroeconomic forces. This is confluence at the highest level.</p></div>
+    </div>
+  </div>
+
+  <div class="section-title">🎯 Going Live — Readiness Checklist</div>
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+      <span style="font-size:13px;font-weight:600">Tick every box before depositing real money</span>
+      <span style="font-size:12px;color:var(--text3)" id="live-prog">0/7 complete</span>
+    </div>
+    <div class="progress-wrap"><div class="progress-fill" id="live-fill" style="width:0%;background:var(--red)"></div></div>
+    <ul class="checklist" id="live-cl">
+      <li onclick="tickLive(this)"><div class="chk-box"></div><div class="chk-text"><strong>30+ backtested trades with positive expectancy</strong><span>Win rate and R:R both calculated and profitable</span></div></li>
+      <li onclick="tickLive(this)"><div class="chk-box"></div><div class="chk-text"><strong>8 CONSECUTIVE profitable demo weeks (not 8 total)</strong><span>Rules followed consistently throughout — one rule break resets the clock</span></div></li>
+      <li onclick="tickLive(this)"><div class="chk-box"></div><div class="chk-text"><strong>Win rate above 40% with R:R of at least 1:2 on demo</strong><span>Both conditions together — high win rate alone is insufficient</span></div></li>
+      <li onclick="tickLive(this)"><div class="chk-box"></div><div class="chk-text"><strong>Zero stop loss moves against your position in last 4 weeks</strong><span>One violation = reset the 4-week clock. Zero exceptions.</span></div></li>
+      <li onclick="tickLive(this)"><div class="chk-box"></div><div class="chk-text"><strong>30+ trade journal entries with psychology notes</strong><span>You know your emotional patterns and have systems to manage them</span></div></li>
+      <li onclick="tickLive(this)"><div class="chk-box"></div><div class="chk-text"><strong>Can explain strategy rules from memory in under 2 minutes</strong><span>If you need to look them up, they aren't internalised yet</span></div></li>
+      <li onclick="tickLive(this)"><div class="chk-box"></div><div class="chk-text"><strong>Trading fund is money you can genuinely afford to lose</strong><span>NEVER: rent money, emergency funds, savings, borrowed capital</span></div></li>
+    </ul>
+    <div class="alert alert-green" id="live-gate" style="display:none;margin-top:12px"><strong>🎉 You are ready to go live.</strong> Start with a micro account ($200–$500). Same strategy, same rules, same risk management. The only change is the money is real. Your process stays identical.</div>
+  </div>
+
+  <div class="section-title">Realistic Timeline to Consistent Profitability</div>
+  <div class="card">
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-dot" style="background:var(--purple);border-color:var(--purple)"></div><h4>Demo Mastery · 3–6 months</h4><p>Consistently profitable on demo. Journal full. Rules never broken. Backtest completed.</p></div>
+      <div class="tl-item"><div class="tl-dot" style="background:var(--blue);border-color:var(--blue)"></div><h4>Micro Live Account · 3–6 months</h4><p>$200–$500 real money. Same rules. Learning the emotional reality of real capital.</p></div>
+      <div class="tl-item"><div class="tl-dot" style="background:var(--green);border-color:var(--green)"></div><h4>Small Live Account · 6–12 months</h4><p>$1,000–$5,000. Refining strategy with real market experience and feedback.</p></div>
+      <div class="tl-item"><div class="tl-dot" style="background:var(--amber);border-color:var(--amber)"></div><h4>Scaling Up · 12–24 months</h4><p>Proven track record. Compounding returns. Consider prop firm funding (FTMO, etc.)</p></div>
+      <div class="tl-item"><div class="tl-dot" style="background:var(--red);border-color:var(--red)"></div><h4>Consistent Profitability · 2–3 years total</h4><p>The realistic timeline for a part-time self-taught trader. Respect it.</p></div>
+    </div>
+  </div>
+
+  <div class="section-title">📚 Advanced Resources</div>
+  <div class="card">
+    <div class="res-item"><div class="res-icon">📅</div><div class="res-body"><strong>ForexFactory Economic Calendar</strong><span>Check this before every single trading session — forever</span><a class="res-link" href="https://www.forexfactory.com/calendar" target="_blank">forexfactory.com/calendar →</a></div></div>
+    <div class="res-item"><div class="res-icon">📊</div><div class="res-body"><strong>TradingEconomics</strong><span>Central bank rates, CPI, GDP data for every country in one place</span><a class="res-link" href="https://tradingeconomics.com" target="_blank">tradingeconomics.com →</a></div></div>
+    <div class="res-item"><div class="res-icon">🎥</div><div class="res-body"><strong>ICT (Inner Circle Trader) YouTube</strong><span>Hundreds of free hours of advanced institutional concepts</span><a class="res-link" href="https://www.youtube.com/@InnerCircleTrader" target="_blank">YouTube: ICT →</a></div></div>
+    <div class="res-item"><div class="res-icon">🏦</div><div class="res-body"><strong>FTMO Prop Firm</strong><span>Funded accounts up to $200k after passing their challenge</span><a class="res-link" href="https://ftmo.com" target="_blank">ftmo.com →</a></div></div>
+  </div>
+
+  <div class="alert alert-red"><strong>🚨 Biggest Mistake at the Advanced Stage:</strong> Abandoning what works to chase complexity. Order blocks, ICT, Wyckoff — all valuable, but only layered ON TOP of your foundation. Your EMA Pullback strategy with discipline beats a complex strategy with poor psychology every time.</div>
+
+  <div class="step-nav"><button class="btn btn-ghost" onclick="goStep(6)">← Step 6</button><button class="btn btn-primary" onclick="showPage('home')">🏠 Back to Roadmap</button></div>
+</div>
+
+<footer>
+  <p><strong>Forex Trading Mastery Roadmap</strong> · Complete 7-Step Beginner to Advanced Guide</p>
+  <p style="margin-top:6px">For educational purposes only. Forex trading involves significant risk of loss. Never trade with money you cannot afford to lose.</p>
+</footer>
+
+<script>
+// ── PAGE NAVIGATION ──────────────────────────────────────────────────────────
+let currentPage = 'home';
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  currentPage = id;
+  window.scrollTo(0,0);
+  document.querySelectorAll('.nav-step').forEach(b => b.classList.remove('active'));
+  if (id === 'home') { document.querySelector('.nav-step[onclick="showPage(\'home\')"]').classList.add('active'); }
+  else { const btn = document.querySelector(`.nav-step[onclick="goStep(${id})"]`); if(btn) btn.classList.add('active'); }
+}
+function goStep(n) { showPage(n); }
+
+// ── CHECKLIST TICK ───────────────────────────────────────────────────────────
+function tick(li) {
+  const box = li.querySelector('.chk-box');
+  const done = box.classList.toggle('done');
+  box.innerHTML = done ? '<svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-7" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '';
+}
+
+// ── ROUTINE CHECKLIST ────────────────────────────────────────────────────────
+function tickRoutine(li) {
+  tick(li);
+  const total = document.querySelectorAll('#page-6 .chk-box').length;
+  const done = document.querySelectorAll('#page-6 .chk-box.done').length;
+  document.getElementById('routine-prog').textContent = `${done}/${total} complete`;
+  document.getElementById('routine-fill').style.width = (done/total*100) + '%';
+  document.getElementById('routine-gate').style.display = done === total ? 'block' : 'none';
+}
+
+// ── LIVE CHECKLIST ───────────────────────────────────────────────────────────
+function tickLive(li) {
+  tick(li);
+  const total = document.querySelectorAll('#live-cl .chk-box').length;
+  const done = document.querySelectorAll('#live-cl .chk-box.done').length;
+  document.getElementById('live-prog').textContent = `${done}/${total} complete`;
+  document.getElementById('live-fill').style.width = (done/total*100) + '%';
+  document.getElementById('live-gate').style.display = done === total ? 'block' : 'none';
+}
+
+// ── PIP CALCULATOR ───────────────────────────────────────────────────────────
+function calcPip() {
+  const pips = parseInt(document.getElementById('pip-sl').value);
+  const lot = parseInt(document.getElementById('lot-sel').value);
+  document.getElementById('pip-v').textContent = pips + ' pips';
+  const pipVal = lot * 0.0001;
+  const pnl = pipVal * pips;
+  document.getElementById('pip-val').textContent = '$' + pipVal.toFixed(2);
+  document.getElementById('pip-pnl').textContent = '+$' + pnl.toFixed(2);
+  document.getElementById('pip-loss').textContent = '-$' + pnl.toFixed(2);
+  const types = {100000:'Standard lot — $10 per pip. Even small moves = large money. Only for experienced traders.',10000:'Mini lot — $1 per pip. Good for $5,000+ accounts.',1000:'Micro lot — $0.10 per pip. Perfect for beginners. Start here.'};
+  document.getElementById('pip-msg').textContent = types[lot] + ` A ${pips}-pip move = $${pnl.toFixed(2)} profit or loss.`;
+}
+calcPip();
+
+// ── MOVING AVERAGE CHART ─────────────────────────────────────────────────────
+const priceData = [1.080,1.083,1.079,1.085,1.088,1.092,1.090,1.095,1.100,1.097,1.103,1.108,1.105,1.110,1.115,1.112,1.107,1.103,1.099,1.095,1.090,1.086,1.082,1.079,1.075,1.071,1.068,1.072,1.076,1.080,1.084,1.089,1.094,1.099,1.104,1.110,1.107,1.103,1.108,1.114,1.119,1.124,1.120,1.115,1.112,1.108,1.104,1.100,1.096,1.092,1.088,1.092,1.097,1.102,1.107,1.112,1.117,1.122,1.127,1.132];
+function ema(data, period) {
+  const k = 2/(period+1); const out = [];
+  let prev = null;
+  for(let i=0;i<data.length;i++) {
+    if(i<period-1){out.push(null);continue;}
+    if(i===period-1){prev=data.slice(0,period).reduce((a,b)=>a+b)/period;out.push(prev);continue;}
+    prev=data[i]*k+prev*(1-k);out.push(parseFloat(prev.toFixed(5)));
+  }
+  return out;
+}
+let maChart = null;
+function updateMA() {
+  const fp = parseInt(document.getElementById('fast-sl').value);
+  const sp = parseInt(document.getElementById('slow-sl').value);
+  document.getElementById('fast-v').textContent = fp;
+  document.getElementById('slow-v').textContent = sp;
+  const fast = ema(priceData, fp), slow = ema(priceData, sp);
+  const lf = fast[fast.length-1], ls = slow[slow.length-1];
+  const bull = lf && ls && lf > ls;
+  document.getElementById('ma-signal').innerHTML = bull
+    ? '<strong style="color:#4ADE80">✓ Bullish signal:</strong> Fast EMA is above Slow EMA — upward momentum. In this condition, only look for buy setups.'
+    : '<strong style="color:#F87171">✗ Bearish signal:</strong> Fast EMA is below Slow EMA — downward momentum. In this condition, only look for sell setups.';
+  const labels = priceData.map((_,i)=>'D'+(i+1));
+  const datasets = [
+    {label:'Price',data:priceData,borderColor:'#378ADD',borderWidth:2,pointRadius:0,tension:.3},
+    {label:`Fast EMA (${fp})`,data:fast,borderColor:'#1D9E75',borderWidth:2,pointRadius:0,tension:.4},
+    {label:`Slow EMA (${sp})`,data:slow,borderColor:'#EF9F27',borderWidth:2,pointRadius:0,tension:.4,borderDash:[5,3]},
+  ];
+  if(maChart){maChart.destroy();}
+  maChart = new Chart(document.getElementById('maChart'), {type:'line',data:{labels,datasets},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#94A3B8',font:{size:11}}}},
+    scales:{x:{ticks:{color:'#64748B',maxTicksLimit:8,font:{size:10}},grid:{color:'rgba(255,255,255,0.05)'}},
+    y:{ticks:{color:'#64748B',callback:v=>v.toFixed(3),font:{size:10}},grid:{color:'rgba(255,255,255,0.05)'},min:Math.min(...priceData)-.003,max:Math.max(...priceData)+.003}}}});
+}
+setTimeout(updateMA, 100);
+
+// ── CANDLESTICK PARTS ─────────────────────────────────────────────────────────
+const candleParts = {
+  'upper-wick':'<strong>Upper wick (shadow)</strong> — The thin line above the body. Shows the highest price reached during the period. A very long upper wick means buyers pushed price up, but sellers forced it back down before close — a sign of rejection at higher prices.',
+  'bull-body':'<strong>Bullish body (green)</strong> — Price closed HIGHER than it opened. Bottom of body = Open. Top = Close. Tall bullish body + short wicks = strong buying momentum. Bulls were firmly in control all period.',
+  'bear-body':'<strong>Bearish body (red)</strong> — Price closed LOWER than it opened. Top of body = Open. Bottom = Close. Tall bearish body + short wicks = strong selling pressure. Bears dominated the entire period.',
+  'lower-wick':'<strong>Lower wick (tail)</strong> — The thin line below the body. Shows the lowest price reached. A long lower wick means sellers pushed price down hard, but buyers stepped in and pushed it back up — a sign of support and potential reversal.',
+};
+function showCandlePart(key) { document.getElementById('candle-detail').innerHTML = candleParts[key]; }
+
+// ── CANDLESTICK PATTERNS ──────────────────────────────────────────────────────
+const patterns = [
+  {name:'Doji',sub:'Open ≈ Close',detail:'<strong>Doji</strong> — Open and close are nearly equal, leaving a tiny or no body with wicks on both sides. Represents pure market indecision. Neither bulls nor bears won the session. In a trend, a doji often signals that momentum is weakening. Watch for the candle that follows to confirm direction.'},
+  {name:'Hammer',sub:'Long lower wick',detail:'<strong>Hammer</strong> — Small body at the top, long lower wick (at least 2× the body length). At the bottom of a downtrend, it signals that sellers pushed price down hard but buyers stepped in and drove it back up. <span style="color:#4ADE80">Bullish reversal signal.</span>'},
+  {name:'Shooting Star',sub:'Long upper wick',detail:'<strong>Shooting Star</strong> — Small body at the bottom, long upper wick. At the top of an uptrend, buyers pushed price up but sellers drove it back down before close. The market rejected higher prices. <span style="color:#F87171">Bearish reversal signal.</span>'},
+  {name:'Engulfing',sub:'Swallows prior candle',detail:'<strong>Engulfing</strong> — A candle whose body completely engulfs the previous candle\'s body. Bullish engulfing (large green engulfs red) at a low = strong buy signal. Bearish engulfing (large red engulfs green) at a high = strong sell signal. One of the most reliable reversal patterns.'},
+  {name:'Morning Star',sub:'3-candle reversal',detail:'<strong>Morning Star</strong> — Three-candle bullish reversal: (1) large red candle confirming downtrend, (2) small body (indecision), (3) large green candle closing well into candle 1\'s body. Signals the bottom is likely in. <span style="color:#4ADE80">Strong bullish signal especially at support.</span>'},
+  {name:'Pin Bar',sub:'Rejection candle',detail:'<strong>Pin Bar (Pinocchio Bar)</strong> — Long wick in one direction, very small body. The wick represents a false move that the market immediately rejected. At support → long wick pointing down = bullish pin bar. At resistance → long wick pointing up = bearish pin bar. Very reliable with confluence.'},
+];
+const pg = document.getElementById('pattern-grid');
+patterns.forEach((p,i) => {
+  const d = document.createElement('div');
+  d.className = 'pattern-card'; d.id = 'pc-'+i;
+  d.innerHTML = `<div class="pname">${p.name}</div><div class="psub">${p.sub}</div>`;
+  d.onclick = () => {
+    document.querySelectorAll('.pattern-card').forEach(c=>c.classList.remove('sel'));
+    d.classList.add('sel');
+    document.getElementById('pattern-detail').innerHTML = p.detail;
+  };
+  pg.appendChild(d);
+});
+
+// ── INDICATOR TABS ────────────────────────────────────────────────────────────
+function showIndTab(id, btn) {
+  document.querySelectorAll('#page-3 .tab-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#page-3 .tab-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('ind-'+id).classList.add('active');
+}
+
+// ── R:R SIMULATOR ─────────────────────────────────────────────────────────────
+function calcRR() {
+  const wr = parseInt(document.getElementById('wr-sl').value)/100;
+  const rr = parseFloat(document.getElementById('rr-sl').value);
+  const tr = parseInt(document.getElementById('tr-sl').value);
+  document.getElementById('wr-v').textContent = Math.round(wr*100)+'%';
+  document.getElementById('rr-v').textContent = '1:'+rr;
+  document.getElementById('tr-v').textContent = tr;
+  const wins = Math.round(tr*wr), losses = tr-wins;
+  const net = wins*rr - losses;
+  const exp = wr*rr - (1-wr);
+  document.getElementById('rr-wins').textContent = wins;
+  document.getElementById('rr-losses').textContent = losses;
+  const netEl = document.getElementById('rr-net');
+  netEl.textContent = (net>=0?'+':'')+net.toFixed(1)+'R';
+  netEl.style.color = net>0 ? '#4ADE80' : '#F87171';
+  document.getElementById('rr-exp').textContent = (exp>=0?'+':'')+exp.toFixed(2)+'R';
+  const msg = document.getElementById('rr-msg');
+  if(exp>0){ msg.className='alert alert-green'; msg.innerHTML=`<strong>✓ Positive expectancy: +${exp.toFixed(2)}R per trade.</strong> Over ${tr} trades you expect +${net.toFixed(1)}R net. Execute this strategy consistently and the math works in your favour.`; }
+  else { msg.className='alert alert-red'; msg.innerHTML=`<strong>✗ Negative expectancy: ${exp.toFixed(2)}R per trade.</strong> You will lose money over time even following every rule. Increase R:R or improve win rate.`; }
+  // Update entry checklist status
+  const ticked = document.querySelectorAll('#entry-cl .chk-box.done').length;
+  const total = document.querySelectorAll('#entry-cl .chk-box').length;
+  const es = document.getElementById('entry-status');
+  if(ticked===total){ es.className='alert alert-green'; es.innerHTML='<strong>✅ All conditions met.</strong> You are clear to execute the trade with correct position sizing.'; }
+  else { es.className='alert alert-blue'; es.innerHTML=`${ticked}/${total} conditions met. All must be true before entering.`; }
+}
+calcRR();
+
+// ── ENTRY CHECKLIST STATUS ────────────────────────────────────────────────────
+document.addEventListener('click', e => {
+  if(e.target.closest('#entry-cl')) setTimeout(()=>{
+    const ticked = document.querySelectorAll('#entry-cl .chk-box.done').length;
+    const total = document.querySelectorAll('#entry-cl .chk-box').length;
+    const es = document.getElementById('entry-status');
+    if(ticked===total){ es.className='alert alert-green'; es.innerHTML='<strong>✅ All 6 conditions met.</strong> You are clear to execute. Now calculate position size and set your stop loss.'; }
+    else { es.className='alert alert-blue'; es.innerHTML=`${ticked}/${total} conditions met. ALL must be true before entering. Missing conditions = no trade.`; }
+  },50);
+});
+
+// ── DRAWDOWN CALCULATOR ───────────────────────────────────────────────────────
+function calcDD() {
+  const rpt = parseInt(document.getElementById('rpt-sl').value);
+  const cl = parseInt(document.getElementById('cl-sl').value);
+  document.getElementById('rpt-v').textContent = rpt+'%';
+  document.getElementById('cl-v').textContent = cl;
+  let rem = 1; for(let i=0;i<cl;i++) rem*=(1-rpt/100);
+  const lost=(1-rem)*100, recover=((1/rem)-1)*100;
+  document.getElementById('dd-rem').textContent = (rem*100).toFixed(1)+'%';
+  document.getElementById('dd-rem').style.color = rem>0.85?'#4ADE80':rem>0.7?'#FCD34D':'#F87171';
+  document.getElementById('dd-lost').textContent = lost.toFixed(1)+'%';
+  document.getElementById('dd-recover').textContent = recover.toFixed(1)+'%';
+  document.getElementById('dd-recover').style.color = recover<15?'#4ADE80':recover<40?'#FCD34D':'#F87171';
+  const msg = document.getElementById('dd-msg');
+  if(rpt<=2){ msg.className='alert alert-green'; msg.innerHTML=`<strong>✓ Safe zone.</strong> At ${rpt}% risk, ${cl} consecutive losses = ${lost.toFixed(1)}% drawdown. You need ${recover.toFixed(1)}% to recover. This is manageable.`; }
+  else if(rpt<=5){ msg.className='alert alert-amber'; msg.innerHTML=`<strong>⚠ Caution.</strong> At ${rpt}% risk, ${cl} losses = ${lost.toFixed(1)}% drawdown. You need ${recover.toFixed(1)}% to break even. Losing streaks of ${cl} are normal.`; }
+  else { msg.className='alert alert-red'; msg.innerHTML=`<strong>🚨 Danger zone.</strong> At ${rpt}% risk, ${cl} losses = ${lost.toFixed(1)}% drawdown. You need ${recover.toFixed(1)}% gain just to get back to where you started. This is account destruction territory.`; }
+}
+calcDD();
+
+// ── POSITION SIZE CALCULATOR ──────────────────────────────────────────────────
+function calcPos() {
+  const bal = parseInt(document.getElementById('bal-sl').value);
+  const risk = parseFloat(document.getElementById('risk-sl').value);
+  const stop = parseInt(document.getElementById('stop-sl').value);
+  document.getElementById('bal-v').textContent = '$'+bal.toLocaleString();
+  document.getElementById('risk-v').textContent = risk+'%';
+  document.getElementById('stop-v').textContent = stop+' pips';
+  const riskAmt = bal*risk/100;
+  const lots = riskAmt/(stop*10);
+  document.getElementById('ps-risk').textContent = '$'+riskAmt.toFixed(2);
+  document.getElementById('ps-lots').textContent = lots.toFixed(3);
+  document.getElementById('ps-type').textContent = lots>=1?'Standard':lots>=0.1?'Mini':'Micro';
+  document.getElementById('ps-formula').textContent = `Lots = ($${bal.toLocaleString()} × ${risk}%) ÷ (${stop} pips × $1) = ${lots.toFixed(3)} lots`;
+}
+calcPos();
+
+// ── EQUITY CURVE ──────────────────────────────────────────────────────────────
+(function buildEQ(){
+  const outcomes=[1,-1,1,1,-1,-1,1,-1,1,1,-1,1,-1,-1,1,1,-1,1,1,-1];
+  const rr=2.5;
+  let disc=[100],undisc=[100];
+  outcomes.forEach(o=>{
+    const pd=disc[disc.length-1],pu=undisc[undisc.length-1];
+    disc.push(parseFloat((pd+(o>0?pd*.01*rr:-pd*.01)).toFixed(2)));
+    undisc.push(parseFloat((pu+(o>0?pu*.05*rr:-pu*.05)).toFixed(2)));
+  });
+  const labels=['Start',...outcomes.map((_,i)=>'T'+(i+1))];
+  document.getElementById('eq-disc').textContent = (((disc[disc.length-1]-100)/100)*100).toFixed(1)+'%';
+  document.getElementById('eq-undisc').textContent = (((undisc[undisc.length-1]-100)/100)*100).toFixed(1)+'%';
+  new Chart(document.getElementById('eqChart'),{type:'line',data:{labels,datasets:[
+    {label:'Disciplined (1% risk)',data:disc,borderColor:'#1D9E75',backgroundColor:'rgba(29,158,117,0.08)',borderWidth:2.5,pointRadius:3,tension:.3,fill:true},
+    {label:'Undisciplined (5% risk)',data:undisc,borderColor:'#E24B4A',backgroundColor:'rgba(226,75,74,0.08)',borderWidth:2.5,pointRadius:3,tension:.3,fill:true},
+  ]},options:{responsive:true,maintainAspectRatio:false,
+  plugins:{legend:{labels:{color:'#94A3B8',font:{size:11}}},tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: $${ctx.raw.toFixed(2)}`}}},
+  scales:{x:{ticks:{color:'#64748B',maxTicksLimit:8,font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'}},
+  y:{ticks:{color:'#64748B',callback:v=>'$'+v.toFixed(0),font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'},title:{display:true,text:'Account Value ($)',color:'#64748B',font:{size:10}}}}}});
+})();
+
+// ── PSYCHOLOGICAL TRAPS ───────────────────────────────────────────────────────
+const traps=[
+  {name:'FOMO',sub:'Fear of missing out',color:'#E24B4A',
+   body:`<strong>What it feels like:</strong> A move runs without you. Every candle that closes without you in the trade feels like money leaving your pocket. So you jump in — even though your checklist isn't met.<br><br><strong>Why your brain does it:</strong> Humans are wired to follow the herd and fear exclusion. Watching others profit while you don't triggers the same neural circuits as physical pain.<div class="fix">✓ <strong>The fix:</strong> Sticky note on your monitor: "There will always be another setup." Missed moves = zero. Chased entries = real losses.</div>`},
+  {name:'Revenge Trading',sub:'After a loss',color:'#D85A30',
+   body:`<strong>What it feels like:</strong> After a stop loss you feel an urgent, hot need to "make it back." You scan immediately for the next setup and enter with a larger position than normal.<br><br><strong>Why your brain does it:</strong> Loss aversion — losses feel roughly twice as painful as gains feel good. The brain treats financial loss as a threat and urges immediate action.<div class="fix">✓ <strong>The fix:</strong> Hard rule: after ANY stop loss, wait 30 minutes and close your charts. Two losses = session over. No exceptions.</div>`},
+  {name:'Overconfidence',sub:'After a winning streak',color:'#7F77DD',
+   body:`<strong>What it feels like:</strong> After 5 winning trades you start sizing up and bending your own entry rules because "you're on a roll." Setups start looking valid when they aren't.<br><br><strong>Why your brain does it:</strong> Winning streaks trigger dopamine. The brain attributes success to skill even when luck played a role, increasing risk appetite.<div class="fix">✓ <strong>The fix:</strong> Position size NEVER increases based on recent wins. A winning streak = time to be MORE cautious, not less.</div>`},
+  {name:'Paralysis',sub:'Scared to pull the trigger',color:'#378ADD',
+   body:`<strong>What it feels like:</strong> A perfect setup forms — every checklist item ticked. But you hesitate. You open more timeframes. By the time you decide to enter, the move is already 40 pips underway.<br><br><strong>Why your brain does it:</strong> After experiencing losses, the brain over-indexes on protection. It generates doubt to prevent action, which feels like safety.<div class="fix">✓ <strong>The fix:</strong> Use a written checklist. When every box is ticked, the trade IS taken. No additional deliberation. You evaluated during backtesting — now you execute.</div>`},
+  {name:'Moving Stops',sub:'Widening your stop',color:'#E24B4A',
+   body:`<strong>What it feels like:</strong> Price is 5 pips from your stop. You tell yourself "just a little more room, it'll turn around." You move the stop further. Price continues and hits the new stop — a much larger loss.<br><br><strong>Why your brain does it:</strong> Hope bias — accepting a loss feels final. Delaying it feels like keeping the possibility alive.<div class="fix">✓ <strong>The fix:</strong> Before entering, say aloud: "If price reaches X, I was wrong and I exit. I accept this." Pre-accepting the loss removes the emotional decision in the moment.</div>`},
+  {name:'Overtrading',sub:'Boredom entries',color:'#1D9E75',
+   body:`<strong>What it feels like:</strong> No valid setup today. But the chart is open, the market is moving, and doing nothing feels like wasting time. You find reasons to enter — "this candle looks interesting."<br><br><strong>Why your brain does it:</strong> Action bias — humans feel more in control when doing something vs. nothing. Inaction feels like passivity even when inaction IS the correct choice.<div class="fix">✓ <strong>The fix:</strong> Track "no trade" days in your journal as WINS. A day where you found no valid setup and didn't trade = perfect execution of your strategy.</div>`},
+];
+const tg = document.getElementById('trap-grid');
+traps.forEach((t,i)=>{
+  const d = document.createElement('div');
+  d.className='trap-card'; d.id='tc-'+i;
+  d.innerHTML=`<div class="tname">${t.name}</div><div class="tsub">${t.sub}</div><div style="width:100%;height:3px;border-radius:2px;background:${t.color};opacity:.6;margin-top:8px"></div>`;
+  d.onclick=()=>{
+    document.querySelectorAll('.trap-card').forEach(c=>c.classList.remove('sel'));
+    d.classList.add('sel');
+    document.getElementById('trap-detail').innerHTML=t.body;
+  };
+  tg.appendChild(d);
+});
+
+// ── STEP 7 TABS ───────────────────────────────────────────────────────────────
+function showF7Tab(id,btn){
+  document.querySelectorAll('#page-7 .tab-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#page-7 .tab-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('f7-'+id).classList.add('active');
+}
+
+// ── ACCORDION ─────────────────────────────────────────────────────────────────
+function toggleAcc(id){
+  const head=document.querySelector(`#acc-${id} .accord-head`);
+  const body=document.getElementById('ab-'+id);
+  const open=body.classList.toggle('open');
+  head.classList.toggle('open',open);
+}
+
+// init
+showPage('home');
+</script>
+</body>
+</html>
